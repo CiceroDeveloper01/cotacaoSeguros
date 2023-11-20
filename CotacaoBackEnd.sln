@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CotacaoBackEnd", "CotacaoBackEnd.csproj", "{B1289652-7C11-46C4-87CA-52D8B47CD792}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CotacaoBackEndApi", "CotacaoBackEndApi.csproj", "{B1289652-7C11-46C4-87CA-52D8B47CD792}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{4B645AC6-F9B6-4497-9CD2-44E6C22D2432}"
 EndProject
@@ -39,7 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrameWorkPipeline", "FrameW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PipelineFramework", "..\FrameWorkPipeline\PipelineFramework.csproj", "{9858F5F1-13E1-4414-8DB0-35310B3300C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CotacaoSeguroPipelineService", "..\CotacaoSeguroPipelineService\CotacaoSeguroPipelineService.csproj", "{67502858-CC7D-4EE2-8F69-3E68CFE8553C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CotacaoSeguroPipelineService", "..\CotacaoSeguroPipelineService\CotacaoSeguroPipelineService.csproj", "{67502858-CC7D-4EE2-8F69-3E68CFE8553C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

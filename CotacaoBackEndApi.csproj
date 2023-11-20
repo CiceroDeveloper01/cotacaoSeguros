@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CotacacoSeguroService\CotacacoSeguroService.csproj" />
     <ProjectReference Include="..\CotacaoSeguroPipelineService\CotacaoSeguroPipelineService.csproj" />
   </ItemGroup>
 
