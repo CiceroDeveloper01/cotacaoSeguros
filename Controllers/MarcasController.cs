@@ -4,6 +4,7 @@ using CotacacoSeguroShared.Commands.Domain;
 using CotacaoSeguroPipelineService.PipelineMarcas.Inclusao.Orquestrador;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace CotacaoBackEnd.Controllers;
 
@@ -23,6 +24,8 @@ public class MarcasController : AbstractController<MarcasRequest, MarcasFilters>
 
     [HttpPost]
     [Route("AdicionarMarcas")]
+    [SwaggerOperation("Marcas")]
+    [SwaggerResponse(201, Type = typeof(MarcasResult), Description = "Adiciona Uma Nova Marca de Carros, Caminhões, Motos e Barcos")]
     public override async Task<IActionResult> Adicionar([FromBody] MarcasRequest domain)
     {
         try
