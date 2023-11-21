@@ -1,4 +1,3 @@
-using CotacaoSeguroPipelineService;
 using CotacacoSeguroService;
 using CotacacoSeguroRepository;
 
@@ -9,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 var stringConnection = builder.Configuration.GetConnectionString("Default");
 
 builder.Services.AddControllers();
-builder.Services.AddPipeline();
 builder.Services.AddService();
 builder.Services.AddRepository(stringConnection);
 
