@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="PipelineCotacoes\Etapas\" />
+    <Folder Include="PipelineCotacoes\Orquestrador\" />
+    <Folder Include="PipelineMarcas\Delete\" />
+    <Folder Include="PipelineMarcas\BuscaPorID\" />
+    <Folder Include="PipelineMarcas\BuscaFiltros\" />
+    <Folder Include="PipelineMarcas\Atualizacao\" />
+    <Folder Include="PipelineModelos\Etapas\" />
+    <Folder Include="PipelineModelos\Orquestrador\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CotacacoSeguroDomain\CotacacoSeguroDomain.csproj" />
+    <ProjectReference Include="..\FrameWorkPipeline\PipelineFramework.csproj" />
+  </ItemGroup>
+
+</Project>

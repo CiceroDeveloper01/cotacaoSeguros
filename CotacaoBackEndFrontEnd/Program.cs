@@ -1,5 +1,6 @@
 using CotacacoSeguroService;
 using CotacacoSeguroRepository;
+using CotacacoSeguroDomain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ var stringConnection = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddControllers();
 builder.Services.AddService();
 builder.Services.AddRepository(stringConnection);
+builder.Services.AddDomain();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
