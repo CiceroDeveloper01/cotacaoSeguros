@@ -1,5 +1,4 @@
 ﻿using CotacacoSeguroDomain.ContratosGenericos.AbstractEntity;
-using CotacacoSeguroDomain.ContratosGenericos.Interfaces.Services;
 using CotacacoSeguroDomain.Veiculos.Marcas.Interfaces.Repository;
 using CotacacoSeguroShared.Attributes;
 
@@ -7,7 +6,7 @@ namespace CotacacoSeguroDomain.Veiculos.Marcas.Entidades;
 
 
 [DataTableAttribute("veiculos", "TB_MARCAS")]
-public class MarcasEntity : EntityPersistence
+public class MarcasEntity : EntityPersistence<MarcasRequest, MarcasEntity>
 {
     private readonly IMarcasRepository _marcasRepository;
     public int ID { get; private set; }
@@ -59,13 +58,29 @@ public class MarcasEntity : EntityPersistence
 
         if (await Validar())
         {
-            var id = await _marcasRepository.VerificarExistenciaRegistro(ID);
+            var existenciaMarca = await _marcasRepository.BuscarPorId(ID);
 
-            if (id != 0)
+            if (existenciaMarca != null)
                 return true;
-
         }
 
         return false;
+    }
+
+    public override async Task<MarcasEntity> VerificarExistenciaRegistro(int ID)
+    {
+        var marca = await _marcasRepository.BuscarPorId(ID);
+
+        if (marca != null)
+        {
+            ID = marca.ID;
+            NomeMarca = marca.NomeMarca;
+            DataAlteracao = marca.DataAlteracao;
+            DataCriacao = marca.DataCriacao;
+
+            return Marcas;
+        }
+            
+        return null;
     }
 }

@@ -9,6 +9,5 @@ public interface IRepository<TEntity, TFilter, TResult>
     public Task<TResult> BuscarPorId(int ID);
     public Task<IEnumerable<TResult>> BuscarPorFiltro(TFilter filter, RetornoLinhasBusca retornoLinhasBusca);
     public Task Deletar(int ID);
-    public Task<int> VerificarExistenciaRegistro(int ID);
-    public Task<int> TotalDeRgistrosCadastrados();
+    public Task<int> TotalDeRegistrosCadastrados(TFilter filter);
 }

@@ -1,7 +1,7 @@
-﻿using CotacacoSeguroDomain.ContratosGenericos.Interfaces.Services;
-using CotacacoSeguroDomain.Veiculos.Marcas.Entidades;
-using CotacacoSeguroDomain.Veiculos.Marcas.Interfaces.Services;
+﻿using CotacacoSeguroDomain.Veiculos.Marcas.Interfaces.Services;
+using CotacacoSeguroDomain.Veiculos.Modelos.Interfaces.Services;
 using CotacacoSeguroService.Veiculos.Marcas;
+using CotacacoSeguroService.Veiculos.Modelos;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CotacacoSeguroService;
@@ -17,6 +17,7 @@ public static class DIService
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddScoped<IMarcasService, MarcasService>();
+        services.AddScoped<IModelosMarcasService, ModelosMarcasService>();
         return services;
     }
 }

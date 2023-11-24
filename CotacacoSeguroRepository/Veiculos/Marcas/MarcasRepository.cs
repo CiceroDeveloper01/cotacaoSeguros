@@ -32,7 +32,7 @@ public class MarcasRepository : IMarcasRepository
 
     public async Task<int> Adicionar(MarcasEntity request)
     {
-        _logger.LogInformation($@"Iniciando a Service: {typeof(MarcasRepository).Name} e o Método: Atualizar");
+        _logger.LogInformation($@"Iniciando a Service: {typeof(MarcasRepository).Name} e o Método: Adicionar");
 
         var sql = @$"INSERT INTO {_tableMarcas}
                                  (NomeMarca
@@ -82,7 +82,7 @@ public class MarcasRepository : IMarcasRepository
 
         if (filter.NomeMarca != "" && filter.TipoProducao != null)
             sql = sql + $@"WHERE NomeMarca LIKE '%{filter.NomeMarca}%'
-                             AND TipoProducao = {filter.TipoProducao?.ToString("G")}) AS RowConstrainedResult";
+                             AND TipoProducao = '{filter.TipoProducao?.ToString("G")}') AS RowConstrainedResult";
 
 
         if (filter.NomeMarca != "" && filter.TipoProducao == null)
@@ -123,23 +123,26 @@ public class MarcasRepository : IMarcasRepository
                        FROM {_tableMarcas}
                       WHERE ID = {ID}";
 
-        await _sqlConnection.QueryFirstOrDefaultAsync<MarcasResult>(sql);
+        await _sqlConnection.ExecuteAsync(sql);
     }
 
-    public async Task<int> VerificarExistenciaRegistro(int ID)
+    public async Task<int> TotalDeRegistrosCadastrados(MarcasFilters filter)
     {
-        _logger.LogInformation($@"Iniciando a Service: {typeof(MarcasRepository).Name} e o Método: VerificarExistenciaRegistro");
-
         var sql = $@"SELECT COUNT(1)
-                       FROM {_tableMarcas}
-                      WHERE ID = {ID} ";
+                       FROM {_tableMarcas}";
+
+        if (filter.NomeMarca != "" && filter.TipoProducao != null)
+            sql = sql + $@"WHERE NomeMarca LIKE '%{filter.NomeMarca}%'
+                             AND TipoProducao = '{filter.TipoProducao?.ToString("G")}'";
+
+
+        if (filter.NomeMarca != "" && filter.TipoProducao == null)
+            sql = sql + $@"WHERE NomeMarca LIKE '%{filter.NomeMarca}%'";
+
+        if (filter.TipoProducao != null && filter.NomeMarca == "")
+            sql = sql + $@"WHERE TipoProducao = '{filter.TipoProducao?.ToString("G")}'";
 
         return await _sqlConnection.ExecuteScalarAsync<int>(sql);
-    }
-
-    public Task<int> TotalDeRgistrosCadastrados()
-    {
-        throw new NotImplementedException();
     }
 
     public async Task<bool> PersistirMarcaExclusao(int ID)

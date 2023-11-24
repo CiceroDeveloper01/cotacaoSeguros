@@ -6,6 +6,7 @@ using CotacacoSeguroShared.Commands.Interfaces;
 using CotacacoSeguroDomain.Veiculos.Marcas.Entidades;
 using CotacacoSeguroShared.Commands.Domain;
 using CotacacoSeguroDomain.Enums;
+using CotacacoSeguroShared.PaginacaoBuscao;
 
 namespace CotacacoSeguroService.Veiculos.Marcas;
 
@@ -26,7 +27,6 @@ public class MarcasService : Notifiable, IMarcasService
 
     public async Task<ICommandResult> Adicionar(MarcasRequest request)
     {
-        
         if (await _marcasEntity.ValidateAdiconar(request)) 
         {
             var IdmarcaInserida = await _marcasRepository.Adicionar(_marcasEntity.Marcas);
@@ -53,9 +53,17 @@ public class MarcasService : Notifiable, IMarcasService
         return new CreatingResultObject((int)ERetornosApi.Ok, false, "Marca, Não Atualizada Com Sucesso", _marcasEntity.ValidFields);
     }
 
-    public Task<ICommandResult> BuscarPorFiltro(MarcasFilters filter)
+    public async Task<ICommandResult> BuscarPorFiltro(MarcasFilters filter)
     {
-        return null;
+        int totalItens = await _marcasRepository.TotalDeRegistrosCadastrados(filter);
+
+        if (totalItens > 0) 
+        { 
+            var objetoPaginacao = ObterPaginacaoInicialFinalBusca.ObterPaginacaoBusca(totalItens, filter.Pagina, filter.QuantidadePagina);
+            var resultado = _marcasRepository.BuscarPorFiltro(filter, objetoPaginacao);
+            return new CreatingResultObject((int)ERetornosApi.Ok, true, "Marcas, Localizadas", resultado);
+        }
+        return new CreatingResultObject((int)ERetornosApi.Ok, true, "Marcas Não Localizadas");
     }
 
     public async Task<ICommandResult> BuscarPorId(int ID)
@@ -71,9 +79,7 @@ public class MarcasService : Notifiable, IMarcasService
 
     public async Task<ICommandResult> Deletar(int ID)
     {
-        var validarParaExclusao = await _marcasRepository.PersistirMarcaExclusao(ID);
-
-        if (validarParaExclusao == true)
+        if (await _marcasRepository.PersistirMarcaExclusao(ID))
         {
             await _marcasRepository.Deletar(ID);
             return new CreatingResultObject((int)ERetornosApi.Ok, true, "Marca, Excluída Com Sucesso");

@@ -15,7 +15,6 @@
     <Folder Include="Seguros\Clientes\Interfaces\Repository\" />
     <Folder Include="Seguros\Cotacoes\Interfaces\Services\" />
     <Folder Include="Seguros\Cotacoes\Interfaces\Repository\" />
-    <Folder Include="Veiculos\Modelos\Interfaces\Services\" />
     <Folder Include="Veiculos\Versoes\Interfaces\Services\" />
     <Folder Include="Veiculos\Versoes\Interfaces\Repository\" />
   </ItemGroup>

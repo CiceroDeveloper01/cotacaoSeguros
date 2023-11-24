@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace CotacaoBackEnd.Controllers;
 
 [AllowAnonymous]
-[Route("v1/")]
+[Route("v1/marcas")]
 public class MarcasController : AbstractController<MarcasRequest, MarcasFilters>
 {
     private readonly ILogger<MarcasController> _logger;
@@ -22,7 +22,7 @@ public class MarcasController : AbstractController<MarcasRequest, MarcasFilters>
     }
 
     [HttpPost]
-    [Route("AdicionarMarcas")]
+    [Route("Adicionar")]
     [SwaggerOperation("Marcas")]
     [SwaggerResponse(201, Type = typeof(MarcasResult), Description = "Adiciona Uma Nova Marca de Carros, Caminhões, Motos e Barcos")]
     public override async Task<IActionResult> Adicionar([FromBody] MarcasRequest request)
@@ -45,7 +45,7 @@ public class MarcasController : AbstractController<MarcasRequest, MarcasFilters>
     }
 
     [HttpPut]
-    [Route("AtualizarMarcas")]
+    [Route("Atualizar")]
     [SwaggerOperation("Marcas")]
     [SwaggerResponse(200, Type = typeof(MarcasResult), Description = "Atualizar Uma Nova Marca de Carros, Caminhões, Motos e Barcos")]
     public override async Task<IActionResult> Atualizar([FromBody] MarcasRequest request)
@@ -71,13 +71,27 @@ public class MarcasController : AbstractController<MarcasRequest, MarcasFilters>
     [Route("BuscarPorFiltros")]
     [SwaggerOperation("Marcas")]
     [SwaggerResponse(200, Type = typeof(MarcasResult), Description = "Buscar Marcas Por Filtro")]
-    public override Task<IActionResult> BuscarPorFiltro([FromBody] MarcasFilters domain)
+    public override async Task<IActionResult> BuscarPorFiltro([FromBody] MarcasFilters domain)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _logger.LogInformation($@"Iniciando a Controller: {typeof(MarcasController).Name} e o Método: BuscarPorId");
+            var resultadoBuscaMarca = await _marcasService.BuscarPorFiltro(domain);
+            return StatusCode(resultadoBuscaMarca.CodeReturn, resultadoBuscaMarca);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogInformation($@"Erro a Controller: {typeof(MarcasController).Name} e o Método: BuscarPorId a Mensagem: {ex.Message}");
+            var error = new CreatingResultObject((int)ERetornosApi.InternalServerError,
+                                                 false,
+                                                 "Houve Um Erro Inesperado, Por favor, tente mais tarde.",
+                                                 ex.Message);
+            return StatusCode(error.CodeReturn, error);
+        }
     }
 
     [HttpGet]
-    [Route("BuscarPorIdMarcas")]
+    [Route("BuscarPorId")]
     [SwaggerOperation("Marcas")]
     [SwaggerResponse(200, Type = typeof(MarcasResult), Description = "Buscar Marcas Por ID")]
     public override async Task<IActionResult> BuscarPorId(int ID)
@@ -100,7 +114,7 @@ public class MarcasController : AbstractController<MarcasRequest, MarcasFilters>
     }
 
     [HttpDelete]
-    [Route("DeletarMarcas")]
+    [Route("Deletar")]
     [SwaggerOperation("Marcas")]
     [SwaggerResponse(200, Type = typeof(MarcasResult), Description = "Deletar Marcas Por ID")]
     public override async Task<IActionResult> Deletar(int ID)
