@@ -25,7 +25,7 @@ public class MarcasController : AbstractController<MarcasRequest, MarcasFilters>
     [Route("Adicionar")]
     [SwaggerOperation("Marcas")]
     [SwaggerResponse(201, Type = typeof(MarcasResult), Description = "Adiciona Uma Nova Marca de Carros, Caminhões, Motos e Barcos")]
-    public override async Task<IActionResult> Adicionar([FromBody] MarcasRequest request)
+    public override async Task<IActionResult> Adicionar([FromBody] MarcasRequest request, CancellationToken cancellationToken)
     {
         try
         {
@@ -48,7 +48,7 @@ public class MarcasController : AbstractController<MarcasRequest, MarcasFilters>
     [Route("Atualizar")]
     [SwaggerOperation("Marcas")]
     [SwaggerResponse(200, Type = typeof(MarcasResult), Description = "Atualizar Uma Nova Marca de Carros, Caminhões, Motos e Barcos")]
-    public override async Task<IActionResult> Atualizar([FromBody] MarcasRequest request)
+    public override async Task<IActionResult> Atualizar([FromBody] MarcasRequest request, CancellationToken cancellationToken)
     {
         try
         {
@@ -71,7 +71,7 @@ public class MarcasController : AbstractController<MarcasRequest, MarcasFilters>
     [Route("BuscarPorFiltros")]
     [SwaggerOperation("Marcas")]
     [SwaggerResponse(200, Type = typeof(MarcasResult), Description = "Buscar Marcas Por Filtro")]
-    public override async Task<IActionResult> BuscarPorFiltro([FromBody] MarcasFilters domain)
+    public override async Task<IActionResult> BuscarPorFiltro([FromBody] MarcasFilters domain, CancellationToken cancellationToken)
     {
         try
         {
@@ -94,7 +94,7 @@ public class MarcasController : AbstractController<MarcasRequest, MarcasFilters>
     [Route("BuscarPorId")]
     [SwaggerOperation("Marcas")]
     [SwaggerResponse(200, Type = typeof(MarcasResult), Description = "Buscar Marcas Por ID")]
-    public override async Task<IActionResult> BuscarPorId(int ID)
+    public override async Task<IActionResult> BuscarPorId(int ID, CancellationToken cancellationToken)
     {
         try
         {
@@ -117,7 +117,7 @@ public class MarcasController : AbstractController<MarcasRequest, MarcasFilters>
     [Route("Deletar")]
     [SwaggerOperation("Marcas")]
     [SwaggerResponse(200, Type = typeof(MarcasResult), Description = "Deletar Marcas Por ID")]
-    public override async Task<IActionResult> Deletar(int ID)
+    public override async Task<IActionResult> Deletar(int ID, CancellationToken cancellationToken)
     {
         try
         {

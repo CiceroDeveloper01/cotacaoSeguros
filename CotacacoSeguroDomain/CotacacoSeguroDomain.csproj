@@ -10,13 +10,6 @@
     <Folder Include="Cotacoes\Clientes\Interfaces\Services\" />
     <Folder Include="Cotacoes\Clientes\Interfaces\Repository\" />
     <Folder Include="Cotacoes\Cotacoes\" />
-    <Folder Include="Seguros\Clientes\Entidades\" />
-    <Folder Include="Seguros\Clientes\Interfaces\Services\" />
-    <Folder Include="Seguros\Clientes\Interfaces\Repository\" />
-    <Folder Include="Seguros\Cotacoes\Interfaces\Services\" />
-    <Folder Include="Seguros\Cotacoes\Interfaces\Repository\" />
-    <Folder Include="Veiculos\Versoes\Interfaces\Services\" />
-    <Folder Include="Veiculos\Versoes\Interfaces\Repository\" />
   </ItemGroup>
 
   <ItemGroup>
